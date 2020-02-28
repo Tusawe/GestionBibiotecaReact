@@ -14,7 +14,7 @@ class BookList extends Component {
   componentDidMount() {
     this.setState({isLoading: true});
 
-    fetch('/api/libro')
+    fetch(`/api/usuario/${this.props.match.params.ins}/libro`)
       .then(response => response.json())
       .then(data => this.setState({books: data, isLoading: false}));
   }
@@ -45,7 +45,7 @@ class BookList extends Component {
         <td>{book.titulo}</td>
         <td>
           <ButtonGroup>
-            <Button size="sm" color="primary" tag={Link} to={"/book/" + book.id}>Editar</Button>
+            <Button size="sm" color="primary" tag={Link} to={"/user/" + this.props.match.params.ins + "/book/" + book.id}>Editar</Button>
             <Button size="sm" color="danger" onClick={() => this.remove(book.id)}>Borrar</Button>
           </ButtonGroup>
         </td>
@@ -57,7 +57,7 @@ class BookList extends Component {
         <AppNavbar/>
         <Container fluid>
           <div className="float-right">
-            <Button color="success" tag={Link} to="/book/new">Añadir libro</Button>
+            <Button color="success" tag={Link} to={"/user/" + this.props.match.params.ins + "/book/new"}>Añadir libro</Button>
           </div>
           <h3>Lista de libros</h3>
           <Table className="mt-4">

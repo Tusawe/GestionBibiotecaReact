@@ -24,9 +24,6 @@ export default class AppNavbar extends Component {
           <NavItem>
             <NavLink href="/user">Gestión de Usuarios</NavLink>
            </NavItem>
-           <NavItem>
-            <NavLink href="/book">Gestión de Libros</NavLink>
-           </NavItem>
         </Nav>
       </Collapse>
     </Navbar>;

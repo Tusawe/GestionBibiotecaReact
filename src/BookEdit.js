@@ -10,8 +10,7 @@ class BookEdit extends Component {
     isbn:'',
     titulo: '',
     editorial: '',
-    npaginas: '',
-    usuario: null
+    npaginas: ''
   };
 
   constructor(props) {
@@ -26,7 +25,7 @@ class BookEdit extends Component {
 
   async componentDidMount() {
     if (this.props.match.params.hor !== 'new') {
-      const book = await (await fetch(`/api/libro/${this.props.match.params.hor}`)).json();
+      const book = await (await fetch(`/api/usuario/${this.props.match.params.ins}/libro/${this.props.match.params.hor}`)).json();
       this.setState({item: book});
     }
     fetch('/api/usuario')
@@ -46,7 +45,7 @@ class BookEdit extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     const {item} = this.state;   
-    await fetch('/api/libro', {
+    await fetch(`/api/usuario/${this.props.match.params.ins}/libro`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -54,7 +53,7 @@ class BookEdit extends Component {
       },
       body: JSON.stringify(item),
     });
-    this.props.history.push('/book');
+    this.props.history.push(`/user/${this.props.match.params.ins}/book`);
   }
 
   render() {
@@ -94,16 +93,16 @@ class BookEdit extends Component {
           </FormGroup>
           {/* <FormGroup>
             <Label for="usuario">Usuario</Label>
-            <select name="usuario" id="usuario" onChange={this.handleChange}>
+            <select onChange={this.handleChange}>
               {(this.state.users.map(user => {
                 user.libros = null
-                return <option value={JSON.stringify(user)}>{user.nombre}</option>
+                return <option name="usuario" id="usuario">{user.nombre}</option>
               }))}
             </select>
           </FormGroup> */}
           <FormGroup>
             <Button color="primary" type="submit">Guardar</Button>{' '}
-            <Button color="secondary" tag={Link} to="/book">Cancelar</Button>
+            <Button color="secondary" tag={Link} to={"/user/" + this.props.match.params.ins + "/book"}>Cancelar</Button>
           </FormGroup>
         </Form>
       </Container>

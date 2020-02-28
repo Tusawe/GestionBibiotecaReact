@@ -16,12 +16,9 @@ class App extends Component {
         <Switch>
           <Route path='/' exact={true} component={Home}/>
           <Route path='/user/:ins/book/:hor' exact={true} component={BookEdit}/>
-          <Route path='/book/:hor' exact={true} component={BookEdit}/>
           <Route path='/user/:ins/book' exact={true} component={BookList}/>
           <Route path='/user/:ins' exact={true} component={UserEdit}/>
           <Route path='/user' exact={true} component={UserList}/>
-          <Route path='/book' exact={true} component={BookList}/>
-          
         </Switch>
       </Router>
     )
